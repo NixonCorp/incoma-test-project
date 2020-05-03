@@ -1,0 +1,52 @@
+.mat-form-field {
+  margin-left: 50px;
+  margin-right: 50%;
+  margin-top: 20px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-input-element::placeholder {
+  color: white;
+}
+
+.badge {
+  margin-right: 20px;
+}
+
+.mat-toolbar {
+  position: fixed;
+  z-index: 100;
+  width: 100% !important;
+}
+
+.mat-card {
+  margin: 80px 10px 2%;
+}
+
+.mat-card-header {
+  height: 130px;
+  width: auto;
+}
+
+.mat-spinner {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.video {
+  width: 100%;
+  height: 300px;
+}
+
+.favoriteActive {
+  color: red;
+}

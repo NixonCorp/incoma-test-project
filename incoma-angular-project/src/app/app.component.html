@@ -1,0 +1,54 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
+  <mat-toolbar-row>
+   <span>
+  <p>Top YOUTUBE Videos</p>
+ </span>
+    <mat-form-field>
+      <mat-label>Фильтр</mat-label>
+      <input matInput placeholder="Фильтр по названию, описанию" (keyup)="applyFilter($event.target.value)"
+             [minLength]="20">
+    </mat-form-field>
+    <p class="badge">
+      <button mat-icon-button (click)="selectDeselectFavorites()">
+        <mat-icon matBadge="{{favoriteVideos.length}}" matBadgeColor="warn">{{badgeIcon}}</mat-icon>
+      </button>
+    </p>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<ng-template #gridTemplate>
+  <div infinite-scroll [infiniteScrollDisabled]="infiniteScrollDisableStatus" (scrolled)="onScrollDown()"
+       fxLayout="row wrap"
+       fxLayoutGap="20px" fxLayout.lt-sm="column" fxLayoutAlign="center">
+    <mat-card *ngFor="let video of filteredVideos" fxFlex="0 1 calc(33.3% - 32px)">
+      <mat-card-header>
+        <mat-card-title>{{video.snippet.title}}</mat-card-title>
+        <mat-card-subtitle>{{video.snippet.description}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <iframe class="video" [src]="video.videoSafeSrc" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                allowfullscreen></iframe>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-icon-button (click)="toggleSelected(video)">
+          <mat-icon class="favoriteActive"
+                    *ngIf="video.isFavorite"
+                    aria-label="Удалить из избранного">
+            favorite
+          </mat-icon>
+          <mat-icon
+            *ngIf="!video.isFavorite"
+            aria-label="Добавить в избранное">
+            favorite_border
+          </mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>
+<div id="content">
+  <div *ngIf="loading else gridTemplate">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</div>
